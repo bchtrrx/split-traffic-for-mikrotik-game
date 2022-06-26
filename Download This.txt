@@ -1,0 +1,10 @@
+/ip firewall mangle
+add action=mark-routing chain=prerouting comment="Game" \
+    connection-rate=!1M-999M dst-port=\
+    !80,443,8000-8081,21,22,23,81,88,5050,843,182,8777,1935,53 \
+    new-routing-mark=VpnGame passthrough=yes protocol=tcp src-address-list=\
+    LOCAL-IP
+add action=mark-routing chain=prerouting connection-rate=!1M-999M dst-port=\
+    !80,443,8000-8081,21,22,23,81,88,5050,843,182,8777,1935,53 \
+    new-routing-mark=VpnGame passthrough=yes protocol=udp src-address-list=\
+    LOCAL-IP
